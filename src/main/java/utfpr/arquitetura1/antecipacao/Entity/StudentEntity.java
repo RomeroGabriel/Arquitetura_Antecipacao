@@ -11,8 +11,13 @@ import java.io.Serializable;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 @Entity
 public class StudentEntity extends PersonEntity  implements Serializable {
     private int RA;
+
+    @Builder
+    public StudentEntity(int RA, String name, Long id){
+        super(id, name);
+        this.RA = RA;
+    }
 }
