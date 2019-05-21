@@ -13,7 +13,7 @@ import java.io.Serializable;
 @MappedSuperclass
 @NoArgsConstructor
 @AllArgsConstructor
-public class PersonEntity implements Serializable {
+public abstract class PersonEntity implements Serializable {
     @Id @GeneratedValue
     private Long Id;
     private String name;
