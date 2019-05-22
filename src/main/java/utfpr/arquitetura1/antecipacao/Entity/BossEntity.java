@@ -9,6 +9,10 @@ import java.io.Serializable;
 
 @Data
 @NoArgsConstructor
-@Builder
 @Entity
-public class BossEntity extends PersonEntity implements Serializable { }
+public class BossEntity extends PersonEntity implements Serializable {
+    @Builder
+    public BossEntity(String name, Long id){
+        super(id, name);
+    }
+}

@@ -11,9 +11,15 @@ import java.io.Serializable;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 @Entity
 public class TeacherEntity extends PersonEntity implements Serializable {
+
+    @Builder
+    public TeacherEntity(String name, Long id, BossEntity boss){
+        super(id, name);
+        this.boss = boss;
+    }
+
     @ManyToOne
     private BossEntity boss;
 }
