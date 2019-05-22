@@ -11,5 +11,6 @@ public class DisciplineGroupEntityDTO {
     private long id;
     private DisciplineDTO discipline;
     private TeacherDTO teacher;
-    private Set<StudentDTO> students;
+    private Set<FrequencyDTO> frequencies;
+
 }
