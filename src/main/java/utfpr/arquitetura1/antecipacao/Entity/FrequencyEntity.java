@@ -13,7 +13,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Entity
+@Entity(name = "FREQUENCY")
 public class FrequencyEntity implements Serializable {
     @EmbeddedId
     FrequencyEntityKey id;

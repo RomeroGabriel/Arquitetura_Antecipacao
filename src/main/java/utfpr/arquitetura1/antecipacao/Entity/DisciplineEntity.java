@@ -13,7 +13,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Entity
+@Entity(name = "DISCIPLINE")
 public class DisciplineEntity  implements Serializable {
 
     @Id

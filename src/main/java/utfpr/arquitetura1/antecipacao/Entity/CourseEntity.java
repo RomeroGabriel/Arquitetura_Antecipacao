@@ -15,7 +15,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Entity
+@Entity(name = "COURSE")
 public class CourseEntity implements Serializable {
     @Id
     @GeneratedValue
