@@ -1,11 +1,11 @@
 package utfpr.arquitetura1.antecipacao.rules;
 
 import org.springframework.beans.BeanUtils;
-import utfpr.arquitetura1.antecipacao.DAO.AcademicCalendarDAO;
-import utfpr.arquitetura1.antecipacao.DAO.AnticipationDAO;
-import utfpr.arquitetura1.antecipacao.DTO.AnticipationDTO;
-import utfpr.arquitetura1.antecipacao.Entity.AcademicCalendarEntity;
-import utfpr.arquitetura1.antecipacao.Entity.AnticipationEntity;
+import utfpr.arquitetura1.antecipacao.dao.AcademicCalendarDAO;
+import utfpr.arquitetura1.antecipacao.dao.AnticipationDAO;
+import utfpr.arquitetura1.antecipacao.dto.AnticipationDTO;
+import utfpr.arquitetura1.antecipacao.entity.AcademicCalendarEntity;
+import utfpr.arquitetura1.antecipacao.entity.AnticipationEntity;
 import utfpr.arquitetura1.antecipacao.exceptions.EmptyFieldException;
 import utfpr.arquitetura1.antecipacao.exceptions.InvalidAnticipationDateException;
 

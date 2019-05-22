@@ -3,9 +3,9 @@ package utfpr.arquitetura1.antecipacao.rules;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import utfpr.arquitetura1.antecipacao.DAO.SolicitationDAO;
-import utfpr.arquitetura1.antecipacao.DTO.SolicitationDTO;
-import utfpr.arquitetura1.antecipacao.Entity.SolicitationEntity;
+import utfpr.arquitetura1.antecipacao.dao.SolicitationDAO;
+import utfpr.arquitetura1.antecipacao.dto.SolicitationDTO;
+import utfpr.arquitetura1.antecipacao.entity.SolicitationEntity;
 import utfpr.arquitetura1.antecipacao.enums.SolicitationStatus;
 
 @AllArgsConstructor

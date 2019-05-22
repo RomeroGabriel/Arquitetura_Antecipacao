@@ -4,20 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import utfpr.arquitetura1.antecipacao.DAO.SolicitationDAO;
-import utfpr.arquitetura1.antecipacao.DTO.SolicitationDTO;
-import utfpr.arquitetura1.antecipacao.enums.SolicitationStatus;
-import utfpr.arquitetura1.antecipacao.rules.CoordinatorRules;
-
 
 @SpringBootApplication
 public class SistemaDeAntecipacaoDeAulaUtfprApplication implements CommandLineRunner {
 
-	private final SolicitationDAO DAO;
-
 	@Autowired
-	public SistemaDeAntecipacaoDeAulaUtfprApplication(SolicitationDAO DAO) {
-		this.DAO = DAO;
+	public SistemaDeAntecipacaoDeAulaUtfprApplication() {
 	}
 
 	public static void main(String[] args) {
@@ -27,18 +19,5 @@ public class SistemaDeAntecipacaoDeAulaUtfprApplication implements CommandLineRu
 	@Override
 	public void run(String... args) throws Exception {
 
-		CoordinatorRules rules = new CoordinatorRules(DAO);
-		SolicitationDTO soli = SolicitationDTO.builder().motive("Test").lessonPlan("Test").status(SolicitationStatus.PENDING).build();
-		rules.acceptAnticipation(soli);
-		DAO.findAll().forEach(System.out::println);
-//		Stream.of(
-//				StudentEntity.builder().name("Gabriel Romero de Souza").RA(1828703).build(),
-//				StudentEntity.builder().name("Mateus Merscher").RA(1234567).build(),
-//				StudentEntity.builder().name("Renan Batel").RA(7654321).build()
-//		).forEach(DAO::save);
-//
-//		DAO.findAll().forEach(System.out::println);
-//		DAO.findAll().stream().forEach(e -> System.out.println(e.getName()));
-//		DAO.findAll().stream().forEach(e -> System.out.println(e.getId()));
 	}
 }
