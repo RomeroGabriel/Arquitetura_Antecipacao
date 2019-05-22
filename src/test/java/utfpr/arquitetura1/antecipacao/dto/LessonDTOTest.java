@@ -1,4 +1,4 @@
-package utfpr.arquitetura1.antecipacao.DTO;
+package utfpr.arquitetura1.antecipacao.dto;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
