@@ -4,15 +4,10 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-import utfpr.arquitetura1.antecipacao.DAO.AcademicCalendarDAO;
-import utfpr.arquitetura1.antecipacao.DTO.AcademicCalendarDTO;
-import utfpr.arquitetura1.antecipacao.DTO.AnticipationDTO;
-import utfpr.arquitetura1.antecipacao.DTO.LessonDTO;
-import utfpr.arquitetura1.antecipacao.Entity.AcademicCalendarEntity;
+import utfpr.arquitetura1.antecipacao.dto.AnticipationDTO;
+import utfpr.arquitetura1.antecipacao.dto.LessonDTO;
 import utfpr.arquitetura1.antecipacao.exceptions.EmptyFieldException;
 import utfpr.arquitetura1.antecipacao.exceptions.InvalidAnticipationDateException;
 

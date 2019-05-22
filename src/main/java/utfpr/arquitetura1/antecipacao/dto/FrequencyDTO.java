@@ -1,0 +1,15 @@
+package utfpr.arquitetura1.antecipacao.dto;
+
+import lombok.Builder;
+import lombok.Data;
+
+
+
+@Data
+@Builder
+public class FrequencyDTO {
+    private int id;
+    private float frequency;
+    private StudentDTO students;
+    private DisciplineGroupEntityDTO disciplineGroup;
+}
