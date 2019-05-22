@@ -6,7 +6,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import java.io.Serializable;
+import java.util.Set;
 
 @Data
 @NoArgsConstructor
@@ -14,6 +17,8 @@ import java.io.Serializable;
 @Entity
 public class StudentEntity extends PersonEntity  implements Serializable {
     private int RA;
+    @OneToMany(mappedBy = "Group")
+    private Set<FrequencyEntity> frequency;
 
     @Builder
     public StudentEntity(int RA, String name, Long id){
