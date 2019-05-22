@@ -6,7 +6,11 @@ import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import utfpr.arquitetura1.antecipacao.DTO.AnticipationDTO;
+import utfpr.arquitetura1.antecipacao.DTO.LessonDTO;
 import utfpr.arquitetura1.antecipacao.exceptions.InvalidAnticipationDateException;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -20,9 +24,18 @@ public class AnticipationRulesTest {
     }
 
     @Test (expected = InvalidAnticipationDateException.class)
-    public void anticipationIsNotBeforeLesson() throws InvalidAnticipationDateException {
-        
+    public void anticipationIsNotBeforeLesson() throws InvalidAnticipationDateException, ParseException {
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        LessonDTO lesson = LessonDTO
+                .builder()
+                .date(format.parse("22/05/2019 16:00:00"))
+                .build();
+        AnticipationDTO anticipation = AnticipationDTO
+                .builder()
+                .date(format.parse("23/05/2019 16:00:00"))
+                .lesson(lesson)
+                .build();
 
-        this.anticipationRules.insert( AnticipationDTO.builder().build() );
+        this.anticipationRules.insert(anticipation);
     }
 }

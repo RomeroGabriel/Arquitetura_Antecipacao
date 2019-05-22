@@ -12,7 +12,7 @@ public class AnticipationRules {
 
     private Boolean anticipationDateIsBeforeLessonDate( AnticipationDTO anticipation ) {
 
-        return false;
+        return anticipation.getDate().compareTo(anticipation.getLesson().getDate()) < 0;
     }
 
     public void insert(AnticipationDTO anticipation) throws InvalidAnticipationDateException {
