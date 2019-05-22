@@ -8,9 +8,12 @@ import utfpr.arquitetura1.antecipacao.enums.SolicitationStatus;
 
 public class CoordinatorRules {
 
+    private SolicitationDAO solicitationDAO;
+
     public void acceptAnticipation(SolicitationDTO solicitation) {
         solicitation.setStatus(SolicitationStatus.APPROVED);
         SolicitationEntity solicitationUpdate = new SolicitationEntity();
         BeanUtils.copyProperties(solicitationUpdate, solicitation);
+        solicitationDAO.save(solicitationUpdate);
     }
 }
