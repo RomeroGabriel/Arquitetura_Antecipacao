@@ -9,5 +9,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public abstract class PersonDTO {
     private Long id;
-    private String nome;
+    private String name;
 }
