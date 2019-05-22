@@ -13,6 +13,7 @@ import utfpr.arquitetura1.antecipacao.DTO.AcademicCalendarDTO;
 import utfpr.arquitetura1.antecipacao.DTO.AnticipationDTO;
 import utfpr.arquitetura1.antecipacao.DTO.LessonDTO;
 import utfpr.arquitetura1.antecipacao.Entity.AcademicCalendarEntity;
+import utfpr.arquitetura1.antecipacao.exceptions.EmptyFieldException;
 import utfpr.arquitetura1.antecipacao.exceptions.InvalidAnticipationDateException;
 
 import java.text.ParseException;
@@ -23,26 +24,14 @@ import java.text.SimpleDateFormat;
 public class AnticipationRulesTest {
 
     AnticipationRules anticipationRules;
-    @Autowired
-    AcademicCalendarDAO academicCalendarDAO;
 
     @Before
     public void before() throws ParseException {
-        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-
         this.anticipationRules = new AnticipationRules();
-        this.academicCalendarDAO.save(
-                AcademicCalendarEntity
-                        .builder()
-                        .startDate(format.parse("02/03/2019 00:00:00"))
-                        .finishDate(format.parse("07/07/2019 00:00:00"))
-                        .semester(1)
-                        .build()
-        );
     }
 
-    @Test (expected = InvalidAnticipationDateException.class)
-    public void anticipationIsNotBeforeLesson() throws ParseException {
+    @Test
+    public void anticipationIsNotBeforeLesson() throws ParseException, EmptyFieldException {
         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         LessonDTO lesson = LessonDTO
                 .builder()
@@ -61,4 +50,14 @@ public class AnticipationRulesTest {
         }
     }
 
+    @Test (expected = EmptyFieldException.class)
+    public void anticipationDontHaveLesson() throws ParseException, InvalidAnticipationDateException, EmptyFieldException {
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        AnticipationDTO anticipation = AnticipationDTO
+                .builder()
+                .date(format.parse("23/05/2019 16:00:00"))
+                .build();
+
+        this.anticipationRules.insert(anticipation);
+    }
 }

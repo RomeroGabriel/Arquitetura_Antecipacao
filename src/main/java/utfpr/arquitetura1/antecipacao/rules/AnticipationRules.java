@@ -6,12 +6,13 @@ import utfpr.arquitetura1.antecipacao.DAO.AnticipationDAO;
 import utfpr.arquitetura1.antecipacao.DTO.AnticipationDTO;
 import utfpr.arquitetura1.antecipacao.Entity.AcademicCalendarEntity;
 import utfpr.arquitetura1.antecipacao.Entity.AnticipationEntity;
+import utfpr.arquitetura1.antecipacao.exceptions.EmptyFieldException;
 import utfpr.arquitetura1.antecipacao.exceptions.InvalidAnticipationDateException;
 
 public class AnticipationRules {
 
     private AnticipationDAO anticipationDAO;
-    AcademicCalendarDAO academicCalendarDAO;
+    private AcademicCalendarDAO academicCalendarDAO;
 
     private Boolean anticipationDateIsBeforeLessonDate(AnticipationDTO anticipation) {
 
@@ -25,7 +26,14 @@ public class AnticipationRules {
             && anticipation.getDate().compareTo(academicCalendar.getFinishDate()) < 0;
     }
 
-    public AnticipationEntity insert(AnticipationDTO anticipation) throws InvalidAnticipationDateException {
+    private Boolean anticipationDontHaveLesson(AnticipationDTO anticipation) {
+
+        return anticipation.getLesson() == null;
+    }
+
+    public AnticipationEntity insert(AnticipationDTO anticipation) throws InvalidAnticipationDateException, EmptyFieldException {
+        if (this.anticipationDontHaveLesson(anticipation))
+            throw new EmptyFieldException("Anticipation lesson");
         if (!this.anticipationDateIsBeforeLessonDate(anticipation))
             throw new InvalidAnticipationDateException("The anticipation cannot be scheduled after its class");
         if (!this.anticipationRespectsTheAcademicCalendar(anticipation))
