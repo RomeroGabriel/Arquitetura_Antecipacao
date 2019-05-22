@@ -1,6 +1,7 @@
 HELP.md
 /target/
 !.mvn/wrapper/maven-wrapper.jar
+derby.log
 
 ### STS ###
 .apt_generated
