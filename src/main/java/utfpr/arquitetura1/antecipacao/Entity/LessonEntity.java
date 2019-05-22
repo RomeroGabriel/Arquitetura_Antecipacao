@@ -21,7 +21,7 @@ public class LessonEntity implements Serializable {
     @GeneratedValue
     private long id;
     @ManyToOne
-    private DisciplineGroupEntity group;
+    private DisciplineGroupEntity disciplineGroup;
     private int credits;
     private Date date;
     private String lessonJournal;

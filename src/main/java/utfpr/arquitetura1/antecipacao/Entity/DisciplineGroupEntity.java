@@ -22,7 +22,7 @@ public class DisciplineGroupEntity implements Serializable {
     private TeacherEntity teacher;
     @ManyToOne
     private DisciplineEntity discipline;
-    @OneToMany(mappedBy = "group")
+    @OneToMany(mappedBy = "disciplineGroup")
     private Set<FrequencyEntity> frequencies;
 
 
