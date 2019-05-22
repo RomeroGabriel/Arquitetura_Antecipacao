@@ -6,8 +6,8 @@ import java.io.Serializable;
 
 @Embeddable
 public class FrequencyEntityKey implements Serializable {
-    @Column(name = "groupID")
-    private Long groupID;
+    @Column(name = "groupId")
+    private Long groupId;
 
     @Column(name = "studentId")
     private Long studentId;

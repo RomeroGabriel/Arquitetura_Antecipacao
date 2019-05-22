@@ -13,7 +13,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Entity
+@Entity(name = "DISCIPLINE_GROUP")
 public class DisciplineGroupEntity implements Serializable {
     @Id
     @GeneratedValue
@@ -22,7 +22,7 @@ public class DisciplineGroupEntity implements Serializable {
     private TeacherEntity teacher;
     @ManyToOne
     private DisciplineEntity discipline;
-    @OneToMany(mappedBy = "Student")
+    @OneToMany(mappedBy = "group")
     private Set<FrequencyEntity> frequencies;
 
 

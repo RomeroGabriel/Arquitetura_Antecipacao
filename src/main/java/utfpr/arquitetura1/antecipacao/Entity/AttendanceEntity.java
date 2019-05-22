@@ -12,7 +12,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Entity
+@Entity(name = "ATTENDANCE")
 public class AttendanceEntity {
     @Id @GeneratedValue
     private long id;

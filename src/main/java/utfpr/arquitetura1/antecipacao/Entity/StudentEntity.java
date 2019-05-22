@@ -14,10 +14,10 @@ import java.util.Set;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
+@Entity(name = "STUDENT")
 public class StudentEntity extends PersonEntity  implements Serializable {
     private int RA;
-    @OneToMany(mappedBy = "Group")
+    @OneToMany(mappedBy = "student")
     private Set<FrequencyEntity> frequencies;
 
     @Builder
