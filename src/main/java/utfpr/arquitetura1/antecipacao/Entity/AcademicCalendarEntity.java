@@ -14,7 +14,6 @@ import java.util.Date;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "ACADEMIC_CALENDAR")
 public class AcademicCalendarEntity implements Serializable {
 
     @Id @GeneratedValue
