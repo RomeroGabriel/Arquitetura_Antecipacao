@@ -22,6 +22,6 @@ public class AnticipationEntity implements Serializable {
     @Enumerated(EnumType.STRING)
     private AnticipationType type;
 
-    // @OneToOne
-    // private LessonEntity lesson;
+    @OneToOne
+    private LessonEntity lesson;
 }

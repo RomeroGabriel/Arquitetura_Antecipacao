@@ -1,5 +1,6 @@
 package utfpr.arquitetura1.antecipacao.Entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,6 +11,7 @@ import java.util.Set;
 
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 @Builder
 @Entity
 public class DisciplineGroupEntity implements Serializable {
@@ -21,7 +23,7 @@ public class DisciplineGroupEntity implements Serializable {
     @ManyToOne
     private DisciplineEntity discipline;
     @OneToMany(mappedBy = "Student")
-    private Set<FrequencyEntity> frequency;
+    private Set<FrequencyEntity> frequencies;
 
 
 }

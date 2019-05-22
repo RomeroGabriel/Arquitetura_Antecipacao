@@ -1,5 +1,6 @@
 package utfpr.arquitetura1.antecipacao.Entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -7,9 +8,11 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Set;
 
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 @Builder
 @Entity
 public class LessonEntity implements Serializable {
@@ -23,7 +26,7 @@ public class LessonEntity implements Serializable {
     private Date date;
     private String lessonJournal;
     @OneToMany
-    private AttendanceEntity attendance;
+    private Set<AttendanceEntity> attendances;
 
 
 }

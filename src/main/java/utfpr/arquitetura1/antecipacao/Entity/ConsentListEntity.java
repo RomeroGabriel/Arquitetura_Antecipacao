@@ -8,7 +8,7 @@ import utfpr.arquitetura1.antecipacao.enums.ConsentListStatus;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.List;
+import java.util.Set;
 
 @Data
 @NoArgsConstructor
@@ -23,5 +23,5 @@ public class ConsentListEntity implements Serializable {
     private ConsentListStatus status;
 
     @OneToMany
-    private List<ConsentEntity> consents;
+    private Set<ConsentEntity> consents;
 }

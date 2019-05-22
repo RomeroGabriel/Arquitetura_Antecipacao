@@ -18,7 +18,7 @@ import java.util.Set;
 public class StudentEntity extends PersonEntity  implements Serializable {
     private int RA;
     @OneToMany(mappedBy = "Group")
-    private Set<FrequencyEntity> frequency;
+    private Set<FrequencyEntity> frequencies;
 
     @Builder
     public StudentEntity(int RA, String name, Long id){
