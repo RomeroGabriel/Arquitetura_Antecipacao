@@ -5,7 +5,7 @@ import lombok.Data;
 import utfpr.arquitetura1.antecipacao.enums.SolicitationStatus;
 import utfpr.arquitetura1.antecipacao.exceptions.EmptyFieldException;
 
-@Data
+//@Data
 @Builder
 public class SolicitationDTO {
 
