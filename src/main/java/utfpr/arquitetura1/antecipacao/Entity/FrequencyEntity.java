@@ -26,7 +26,7 @@ public class FrequencyEntity implements Serializable {
     @ManyToOne
     @MapsId("groupId")
     @JoinColumn(name = "groupId")
-    DisciplineGroupEntity group;
+    DisciplineGroupEntity disciplineGroup;
 
     private float frequency;
 
