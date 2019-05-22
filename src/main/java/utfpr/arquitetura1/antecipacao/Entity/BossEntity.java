@@ -9,7 +9,7 @@ import java.io.Serializable;
 
 @Data
 @NoArgsConstructor
-@Entity
+@Entity(name = "BOSS")
 public class BossEntity extends PersonEntity implements Serializable {
     @Builder
     public BossEntity(String name, Long id){
