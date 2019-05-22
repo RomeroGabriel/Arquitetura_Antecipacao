@@ -23,6 +23,7 @@ public class LessonEntity implements Serializable {
     @ManyToOne
     private DisciplineGroupEntity disciplineGroup;
     private int credits;
+    @Basic @Temporal(TemporalType.TIMESTAMP)
     private Date date;
     private String lessonJournal;
     @OneToMany
