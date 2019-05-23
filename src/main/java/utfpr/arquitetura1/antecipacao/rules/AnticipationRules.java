@@ -19,11 +19,21 @@ public class AnticipationRules {
         inicializados e ser usados nos métodos abaixo sem precisar passar o dao
         como parametro dos métodos
      */
+
+ /*
+        Verificar essa regra na hora de criar um objeto de antecipção
+        Exemplo está na classe AnticipationDTO
+     */
     private Boolean anticipationDateIsBeforeLessonDate(AnticipationDTO anticipation) {
 
         return anticipation.getDate().compareTo(anticipation.getLesson().getDate()) < 0;
     }
 
+    /*
+        Talvez seria melhor criar uma outra classe para possuir esse método,
+        não deixando a responsabilidade dele para essa classe e facilitando a utilização dele
+        em outro lugar caso exista no futuro a sua necessidade
+     */
     private Boolean anticipationRespectsTheAcademicCalendar(AnticipationDTO anticipation) {
         AcademicCalendarEntity academicCalendar = this.academicCalendarDAO.getOne(new Long(1));
 

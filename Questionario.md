@@ -4,7 +4,7 @@ Code Review realizado a partir do questionário disponibilizado na matéria de a
 
 ## Ferramentas Utilizadas
 
-- Análise de Código: Code Climate
+- Análise de Código: Code Climate [![Maintainability](https://api.codeclimate.com/v1/badges/a99a88d28ad37a79dbf6/maintainability)](https://codeclimate.com/github/codeclimate/codeclimate/maintainability)
 
 ## Participante
 
@@ -32,12 +32,18 @@ funções distribuídadas de acordo com os pacotes.
 ### Princípios de desenvolvimento
 
 - O projeto usa inversão de dependência de forma adequada?
+Sim. As classe se comunicam de acordo com a estrutura de camadas e a herança é feita por abstração.
 
 - O projeto usa o princípio open-closed quando conveniente?
+Não. O projeto só utilizou meios pre disponíveis pelo jpa, a regra de negócios
+não possue nenhuma garantia de que o código continuará o mesmo para manter a consistência.
 
 - O projeto usa o princípio de substituição de Liskov quando conveniente?
+Sim. Sua abstração da classe pessoa facilita a utilização desse princípio.
 
 - O projeto usa o princípio de segregação de interfaces quanto conveniente?
+O projeto não possui interfaces diferentes das interfaces DAOS composta e distribuídas pelo jpa,
+assim não contendo nenhuma interface criada e implementada para que haja a segregação.
 
 - O projeto evita repetição frequente de código?
 Sim. Eu medi a repetição de acordo com o CodeClimate e nenhuma duplicação foi encontrada no projeto.
@@ -68,8 +74,10 @@ Sim. O github, foi utilizado para versionar o projeto, contendo o commit de todo
 ### Padrões de projeto 
 
 - Algum padrão de projeto foi usado quando conveniente?
+Sim. O repository pattern foi utilizado no projeto para persistir os dados
 
 - A estrutura do padrão de projeto foi implementada corretamente? 
+Sim. A estrutura está de acordo com que a biblioteca jpa oferece para esse padrão de projeto.
 
 ### Bibliotecas
 
