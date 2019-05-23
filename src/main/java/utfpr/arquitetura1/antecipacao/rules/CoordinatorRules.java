@@ -14,11 +14,16 @@ public class CoordinatorRules {
     @Autowired
     private SolicitationDAO solicitationDAO;
 
+    /*
+        Adicionar injeção de dependencia para do dao acima, para que ele seja
+        inicializado e ser usado no método abaixo sem precisar passar o dao
+        como parametro do método
+     */
     public void acceptAnticipation(SolicitationDTO solicitation) {
         solicitation.setStatus(SolicitationStatus.APPROVED);
         SolicitationEntity solicitationUpdate = new SolicitationEntity();
         solicitationUpdate.setMotive(solicitation.getMotive());
-        BeanUtils.copyProperties(solicitation,solicitationUpdate);
+        BeanUtils.copyProperties(solicitation, solicitationUpdate);
         solicitationDAO.save(solicitationUpdate);
     }
 }

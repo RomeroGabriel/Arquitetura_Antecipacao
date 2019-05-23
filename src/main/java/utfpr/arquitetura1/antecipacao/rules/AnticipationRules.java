@@ -14,6 +14,11 @@ public class AnticipationRules {
     private AnticipationDAO anticipationDAO;
     private AcademicCalendarDAO academicCalendarDAO;
 
+    /*
+        Adicionar injeção de dependencia para os daos acima, para que eles sejam
+        inicializados e ser usados nos métodos abaixo sem precisar passar o dao
+        como parametro dos métodos
+     */
     private Boolean anticipationDateIsBeforeLessonDate(AnticipationDTO anticipation) {
 
         return anticipation.getDate().compareTo(anticipation.getLesson().getDate()) < 0;
@@ -23,7 +28,7 @@ public class AnticipationRules {
         AcademicCalendarEntity academicCalendar = this.academicCalendarDAO.getOne(new Long(1));
 
         return anticipation.getDate().compareTo(academicCalendar.getStartDate()) > 0
-            && anticipation.getDate().compareTo(academicCalendar.getFinishDate()) < 0;
+                && anticipation.getDate().compareTo(academicCalendar.getFinishDate()) < 0;
     }
 
     private Boolean anticipationDontHaveLesson(AnticipationDTO anticipation) {
@@ -32,12 +37,15 @@ public class AnticipationRules {
     }
 
     public AnticipationEntity insert(AnticipationDTO anticipation) throws InvalidAnticipationDateException, EmptyFieldException {
-        if (this.anticipationDontHaveLesson(anticipation))
+        if (this.anticipationDontHaveLesson(anticipation)) {
             throw new EmptyFieldException("Anticipation lesson");
-        if (!this.anticipationDateIsBeforeLessonDate(anticipation))
+        }
+        if (!this.anticipationDateIsBeforeLessonDate(anticipation)) {
             throw new InvalidAnticipationDateException("The anticipation cannot be scheduled after its class");
-        if (!this.anticipationRespectsTheAcademicCalendar(anticipation))
+        }
+        if (!this.anticipationRespectsTheAcademicCalendar(anticipation)) {
             throw new InvalidAnticipationDateException("The anticipation date must respect the academic calendar");
+        }
 
         AnticipationEntity entity = new AnticipationEntity();
 
