@@ -45,7 +45,11 @@ public class SolicitationService {
 
     @PostMapping("/service/solicitation")
     public  ResponseEntity<SolicitationDTO> create (@RequestBody SolicitationDTO solicitation) {
+        Optional<AnticipationDTO> anticipation =
+                anticipationList.stream().filter(a -> a.getId() == solicitation.getAnticipation().getId()).findAny();
+
         solicitation.setId(Long.valueOf(solicitationList.size() + 1));
+        solicitation.setAnticipation(anticipation.get());
         solicitationList.add(solicitation);
         return ResponseEntity.status(201).body(solicitation);
     }
@@ -61,6 +65,8 @@ public class SolicitationService {
     @PutMapping("/service/solicitation/{id}")
     public ResponseEntity<SolicitationDTO> update (@PathVariable Long id, @RequestBody SolicitationDTO solicitation){
         Optional<SolicitationDTO> hasSolicitation = solicitationList.stream().filter(s -> s.getId() == id).findAny();
+        Optional<AnticipationDTO> anticipation =
+                anticipationList.stream().filter(a -> a.getId() == solicitation.getAnticipation().getId()).findAny();
 
         hasSolicitation.ifPresent(s -> {
             try {
@@ -70,7 +76,7 @@ public class SolicitationService {
             }
             s.setStatus(solicitation.getStatus());
             s.setLessonPlan(solicitation.getLessonPlan());
-            s.setAnticipation(solicitation.getAnticipation());
+            s.setAnticipation(anticipation.get());
             s.setConsentList(solicitation.getConsentList());
         });
 
