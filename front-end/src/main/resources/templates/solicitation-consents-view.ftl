@@ -29,6 +29,7 @@
       <h1 class="display-4">Anexar lista de anuência</h1>
       <p class="lead">Anexe o arquivo contendo a lista de anuências.</p>
       <form method="POST" enctype="multipart/form-data" action="/solicitation/consent">
+      <input type="hidden" name="id" value="${(solicitation)!}" />
 
       <div class="input-group">
         <div class="input-group-prepend">

@@ -1,5 +1,7 @@
 package utfpr.arquitetura1.antecipacao.service;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -101,20 +103,18 @@ public class SolicitationService {
 
         return ResponseEntity.of(hasSolicitation);
     }
+
     @PostMapping("/consent")
-    public ResponseEntity<String> uploadConsent(@RequestParam("file") MultipartFile file) throws Exception {
+    public ResponseEntity<String> uploadConsent(@PathVariable Long id, String file) {
 
         if (file == null) {
             throw new RuntimeException("You must select the a file for uploading");
         }
-        InputStream inputStream = file.getInputStream();
-        String Test;
-
-        try (BufferedReader br = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8))) {
-            Test = br.lines().collect(Collectors.joining(System.lineSeparator()));
-        }
+        Long Test = id;
+        String base64 = file;
 
         System.out.println(Test);
+//        solicitationList.add(solicitation);
 
         // Do processing with uploaded file data in Service layer
 

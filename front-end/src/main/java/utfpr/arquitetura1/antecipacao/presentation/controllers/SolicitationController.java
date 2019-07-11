@@ -4,8 +4,11 @@ import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
+import org.apache.tomcat.util.http.fileupload.IOUtils;
+import org.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StreamUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,7 +17,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import utfpr.arquitetura1.antecipacao.presentation.models.AnticipationModel;
 import utfpr.arquitetura1.antecipacao.presentation.models.SolicitationModel;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -153,9 +160,31 @@ public class SolicitationController {
     }
 
     @GetMapping("/solicitation/consents")
-    public String readConsents(Model data) throws JsonSyntaxException, UnirestException {
+    public String readConsents(@RequestParam int id, Model data) throws JsonSyntaxException, UnirestException {
+
+        data.addAttribute("solicitation", id);
 
         return "solicitation-consents-view";
+    }
+    @PostMapping ("/solicitation/consents")
+    public String uploadConsent(@RequestParam int id,MultipartFile consent) throws UnirestException, IOException {
+        if(!consent.isEmpty()) {
+            InputStream consentS = consent.getInputStream();
+            byte[] bytes =  StreamUtils.copyToByteArray(consentS);
+            byte[] convert = Base64.getEncoder().encode(bytes);
+
+            JSONObject JsonObject = new JSONObject();
+            JsonObject.put("id",id);
+            JsonObject.put("file",convert);
+
+            Unirest
+                    .post(this.getServiceUrl("/consent"))
+                    .header("Content-type", "application/json")
+                    .header("accept", "application/json")
+                    .body(JsonObject)
+                    .asJson();
+        }
+        return "redirect:/solicitation";
     }
 
 }

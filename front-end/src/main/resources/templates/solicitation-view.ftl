@@ -75,7 +75,7 @@
             <td>${solicitation.lessonPlan}</td>
             <td>${solicitation.anticipation.id}</td>
             <td>
-              <a href="/solicitation/consents" class="btn btn-info"><i class="fas fa-paperclip"></i> Anuências</a>
+              <a href="/solicitation/consents?id=${solicitation.id} " class="btn btn-info"><i class="fas fa-paperclip"></i> Anuências</a>
               <a href="/solicitation/edit?id=${solicitation.id}" class="btn btn-secondary"><i class="fas fa-pencil-alt"></i> Alterar</a>
               <a href="/solicitation/delete?id=${solicitation.id}" class="btn btn-outline-danger"><i class="fas fa-trash"></i> Excluir</a>
             </td>
