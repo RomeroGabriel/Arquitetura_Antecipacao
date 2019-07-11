@@ -56,34 +56,19 @@ public class SolicitationController {
                         AnticipationModel[].class
                 );
         SolicitationModel solicitations[] = new Gson()
-                    .fromJson(
+                .fromJson(
                         Unirest
-                            .get(this.getServiceUrl("/service/solicitation"))
-                            .asJson()
-                            .getBody()
-                            .toString(),
+                                .get(this.getServiceUrl("/service/solicitation"))
+                                .asJson()
+                                .getBody()
+                                .toString(),
                         SolicitationModel[].class
-                    );
-//        for(int i=0;i < solicitations.length;i++){
-//            solicitations[i].setAnticipationId(solicitations[i].getAnticipation().id);
-//        }
-//        List<SolicitationModel> solicitations = Stream.of(
-//                SolicitationModel.builder().id(new Long(1)).motive("motive 1").lessonPlan("plan 1").solicitationStatus("status 1").anticipationId(new Long(1)).build()
-//        ).collect(Collectors.toList());
+                );
 
         data.addAttribute("solicitations", solicitations);
         data.addAttribute("anticipations", anticipations);
 
         return "solicitation-view";
-    }
-    @PostMapping("/solicitation/consent")
-    public String handleConsentUpload(@RequestParam("file") MultipartFile file,
-                                   RedirectAttributes redirectAttributes) {
-        System.out.println("subiu");
-        redirectAttributes.addFlashAttribute("message",
-                "You successfully uploaded " + file.getOriginalFilename() + "!");
-
-        return "redirect:/solicitation";
     }
 
 
@@ -161,30 +146,26 @@ public class SolicitationController {
     }
 
     @GetMapping("/solicitation/consents")
-    public String readConsents(@RequestParam int id, Model data) throws JsonSyntaxException, UnirestException {
+    public String readConsents(@RequestParam Long id, Model data) throws JsonSyntaxException, UnirestException {
 
         data.addAttribute("solicitation", id);
 
         return "solicitation-consents-view";
     }
-    @PostMapping ("/solicitation/consents")
-    public String uploadConsent(@RequestParam int id,MultipartFile consent) throws UnirestException, IOException {
-        if(!consent.isEmpty()) {
-            InputStream consentS = consent.getInputStream();
+    @PostMapping ("/solicitation/consent")
+    public String uploadConsent(@RequestParam int id,MultipartFile file) throws UnirestException, IOException {
+
+            InputStream consentS = file.getInputStream();
             byte[] bytes =  StreamUtils.copyToByteArray(consentS);
             byte[] convert = Base64.getEncoder().encode(bytes);
 
-            JSONObject JsonObject = new JSONObject();
-            JsonObject.put("id",id);
-            JsonObject.put("file",convert);
-
             Unirest
-                    .post(this.getServiceUrl("/consent"))
-                    .header("Content-type", "application/json")
+                    .post(this.getServiceUrl("/consent/{id}"))
+                    .routeParam("id", String.valueOf(id))
+                    .header("Content-type", "text/plain")
                     .header("accept", "application/json")
-                    .body(JsonObject)
-                    .asJson();
-        }
+                    .body(convert);
+
         return "redirect:/solicitation";
     }
 

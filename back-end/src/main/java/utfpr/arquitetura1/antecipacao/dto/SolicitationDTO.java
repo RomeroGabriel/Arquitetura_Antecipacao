@@ -5,6 +5,8 @@ import lombok.Data;
 import utfpr.arquitetura1.antecipacao.enums.SolicitationStatus;
 import utfpr.arquitetura1.antecipacao.exceptions.EmptyFieldException;
 
+import java.util.List;
+
 @Data
 @Builder
 public class SolicitationDTO {
@@ -14,7 +16,7 @@ public class SolicitationDTO {
     private String lessonPlan;
     private SolicitationStatus status;
     private AnticipationDTO anticipation;
-    private ConsentListDTO consentList;
+    private String consentList;
 
     public void setMotive(String motive) throws EmptyFieldException {
         if (motive.isEmpty())

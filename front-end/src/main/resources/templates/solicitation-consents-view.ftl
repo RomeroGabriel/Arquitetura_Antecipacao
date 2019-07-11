@@ -31,19 +31,12 @@
       <form method="POST" enctype="multipart/form-data" action="/solicitation/consent">
       <input type="hidden" name="id" value="${(solicitation)!}" />
 
-      <div class="input-group">
-        <div class="input-group-prepend">
-          <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
+      <div class="form-group">
+        <input name="file" type="file" class="form-control-file" id="file">
+          <div class="d-flex justify-content-end">
+            <button type="submit" class="btn btn-dark">Enviar</button>
+          </div>
         </div>
-        <div class="custom-file">
-          <input name="file" type="file" class="custom-file-input" id="inputGroupFile01"
-            aria-describedby="inputGroupFileAddon01">
-          <label class="custom-file-label" for="inputGroupFile01"></label>
-        </div>
-      </div>
-      <div class="d-flex justify-content-end">
-        <button type="submit" class="btn btn-dark">Enviar</button>
-      </div>
       <form>
     </div>
   </div>
