@@ -91,10 +91,10 @@ public class SolicitationController {
     @GetMapping ("/solicitation/delete")
     public String delete(@RequestParam int id) throws UnirestException {
 
-//        Unirest
-//            .delete(this.getServiceUrl("[endpoint]"))
-//            .routeParam("id", String.valueOf(id))
-//            .asJson();
+        Unirest
+            .delete(this.getServiceUrl("/service/solicitation/{id}"))
+            .routeParam("id", String.valueOf(id))
+            .asJson();
 
         return "redirect:/solicitation";
     }

@@ -86,6 +86,12 @@
                   class="fas fa-pencil-alt"></i> Alterar</a>
               <a href="/solicitation/delete?id=${solicitation.id}" class="btn btn-outline-danger"><i
                   class="fas fa-trash"></i> Excluir</a>
+<#--  
+                  <#if solicitation.consentList?has_content>
+                    <a href="${solicitation.consentList}" class="btn btn-outline-success" target="download">
+                      <i class="fas fa-download"></i> download</a>
+                  </#if>  -->
+              
             </td>
           </tr>
         </#list>
