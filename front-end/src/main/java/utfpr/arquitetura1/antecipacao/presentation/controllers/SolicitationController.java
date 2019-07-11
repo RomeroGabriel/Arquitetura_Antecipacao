@@ -22,6 +22,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Base64;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -30,11 +31,16 @@ import java.util.stream.Stream;
 @Controller
 public class SolicitationController {
 
-    static String SERVICE_BASE_URL = "http://localhost:8080/";
+    static String SERVICE_BASE_URL = "http://localhost:8080";
     private AnticipationModel anticipations[] =  new AnticipationModel[0];
 
     private String getServiceUrl( String endpoint ) {
         return SERVICE_BASE_URL + endpoint;
+    }
+
+    @GetMapping("/")
+    public String redirect() {
+        return "redirect:/solicitation";
     }
 
     @GetMapping("/solicitation")
@@ -109,37 +115,32 @@ public class SolicitationController {
     }
 
     @GetMapping ("/solicitation/edit")
-    public String edit(@RequestParam int id, Model data) throws JsonSyntaxException, UnirestException {
+    public String edit(@RequestParam Long id, Model data) throws JsonSyntaxException, UnirestException {
 
-//        SolicitationModel currentSolicitation = new Gson()
-//            .fromJson(
-//                Unirest
-//                    .get(this.getServiceUrl("[endpoint]"))
-//                    .routeParam("id", String.valueOf(id))
-//                    .asJson()
-//                    .getBody()
-//                    .toString(),
-//                SolicitationModel.class
-//            );
+        anticipations = new Gson()
+                .fromJson(
+                        Unirest
+                                .get(this.getServiceUrl("/service/anticipations"))
+                                .asJson()
+                                .getBody()
+                                .toString(),
+                        AnticipationModel[].class
+                );
+        SolicitationModel solicitations[] = new Gson()
+                .fromJson(
+                        Unirest
+                                .get(this.getServiceUrl("/service/solicitation"))
+                                .asJson()
+                                .getBody()
+                                .toString(),
+                        SolicitationModel[].class
+                );
 
-        SolicitationModel currentSolicitation = SolicitationModel.builder().id(new Long(1)).motive("motive 1").lessonPlan("plan 1").solicitationStatus("status 1").anticipationId(new Long(1)).build();
+        Optional<SolicitationModel> currentSolicitationOptions = Arrays.stream(solicitations).filter(p -> p.getId() ==  id).findAny();
+        SolicitationModel currentSolicitation = currentSolicitationOptions.get();
 
         data.addAttribute("currentSolicitation", currentSolicitation);
-
-//        SolicitationModel solicitations[] = new Gson()
-////                    .fromJson(
-////                        Unirest
-////                            .get(this.getServiceUrl("[endpoint]"))
-////                            .asJson()
-////                            .getBody()
-////                            .toString(),
-////                        SolicitationModel[].class
-////                    );
-
-        List<SolicitationModel> solicitations = Stream.of(
-                SolicitationModel.builder().id(new Long(1)).motive("motive 1").lessonPlan("plan 1").solicitationStatus("status 1").anticipationId(new Long(1)).build()
-        ).collect(Collectors.toList());
-
+        data.addAttribute("anticipations", anticipations);
         data.addAttribute("solicitations", solicitations);
 
         return "solicitation-edit-view";
@@ -148,13 +149,13 @@ public class SolicitationController {
     @PostMapping ("/solicitation/update")
     public String update(SolicitationModel solicitation) throws UnirestException {
 
-//        Unirest
-//            .put(this.getServiceUrl("[endpoint]"))
-//            .routeParam("id", String.valueOf(solicitation.getId()))
-//            .header("Content-type", "application/json")
-//            .header("accept", "application/json")
-//            .body(new Gson().toJson(solicitation, SolicitationModel.class))
-//            .asJson();
+        Unirest
+            .put(this.getServiceUrl("/service/solicitation/{id}"))
+            .routeParam("id", String.valueOf(solicitation.getId()))
+            .header("Content-type", "application/json")
+            .header("accept", "application/json")
+            .body(new Gson().toJson(solicitation, SolicitationModel.class))
+            .asJson();
 
         return "redirect:/solicitation";
     }
