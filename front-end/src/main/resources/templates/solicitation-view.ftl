@@ -35,20 +35,19 @@
     <form action="/solicitation/create" method="post">
       <div class="form-group">
         <label for="motive">Motivo</label>
-        <textarea value="${(currentSolicitation.motive)!}" class="form-control" id="motive" rows="3"></textarea>
+        <textarea value="${(currentSolicitation.motive)!}" class="form-control" id="motive" name="motive" rows="3"></textarea>
       </div>
       <div class="form-group">
         <label for="lessonPlan">Plano de aula</label>
-        <textarea value="${(currentSolicitation.lessonPlan)!}" class="form-control" id="lessonPlan" rows="3"></textarea>
+        <textarea value="${(currentSolicitation.lessonPlan)!}" class="form-control" id="lessonPlan" name="lessonPlan" rows="3"></textarea>
       </div>
       <div class="form-group">
         <label for="anticipationId">Antecipação</label>
-        <select value="${(currentSolicitation.anticipationId)!}" class="form-control" id="anticipationId">
-          <option value="1">Antecipação 1</option>
-          <option value="2">Antecipação 2</option>
-          <option value="3">Antecipação 3</option>
-          <option value="4">Antecipação 4</option>
-          <option value="5">Antecipação 5</option>
+        <select value="${(currentSolicitation.anticipationId)!}" class="form-control" id="anticipationId" name="anticipationId">
+                  <#list anticipations as anticipation>
+                       <option value="${(anticipation.id)!}">${anticipation.id}</option>
+                  </#list>
+
         </select>
       </div>
       <div class="d-flex justify-content-end">
@@ -74,7 +73,7 @@
             <td scope="row">${solicitation.id}</td>
             <td>${solicitation.motive}</td>
             <td>${solicitation.lessonPlan}</td>
-            <td>${solicitation.anticipationId}</td>
+            <td>${solicitation.anticipation.id}</td>
             <td>
               <a href="/solicitation/consents" class="btn btn-info"><i class="fas fa-paperclip"></i> Anuências</a>
               <a href="/solicitation/edit?id=${solicitation.id}" class="btn btn-secondary"><i class="fas fa-pencil-alt"></i> Alterar</a>

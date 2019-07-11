@@ -1,13 +1,19 @@
 package utfpr.arquitetura1.antecipacao.service;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import utfpr.arquitetura1.antecipacao.dto.AnticipationDTO;
 import utfpr.arquitetura1.antecipacao.dto.SolicitationDTO;
 import utfpr.arquitetura1.antecipacao.enums.AnticipationType;
 import utfpr.arquitetura1.antecipacao.enums.SolicitationStatus;
 import utfpr.arquitetura1.antecipacao.exceptions.EmptyFieldException;
 
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -42,6 +48,12 @@ public class SolicitationService {
     public ResponseEntity<List<SolicitationDTO>> list (){
         return ResponseEntity.ok(solicitationList);
     }
+
+    @GetMapping("/service/anticipations")
+    public ResponseEntity<List<AnticipationDTO>> listAnt (){
+        return ResponseEntity.ok(anticipationList);
+    }
+
 
     @PostMapping("/service/solicitation")
     public  ResponseEntity<SolicitationDTO> create (@RequestBody SolicitationDTO solicitation) {
@@ -88,5 +100,24 @@ public class SolicitationService {
         Optional<SolicitationDTO> hasSolicitation = solicitationList.stream().filter(s -> s.getId() == id).findAny();
 
         return ResponseEntity.of(hasSolicitation);
+    }
+    @PostMapping("/consent")
+    public ResponseEntity<String> uploadConsent(@RequestParam("file") MultipartFile file) throws Exception {
+
+        if (file == null) {
+            throw new RuntimeException("You must select the a file for uploading");
+        }
+        InputStream inputStream = file.getInputStream();
+        String Test;
+
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8))) {
+            Test = br.lines().collect(Collectors.joining(System.lineSeparator()));
+        }
+
+        System.out.println(Test);
+
+        // Do processing with uploaded file data in Service layer
+
+        return new ResponseEntity<String>("file uploaded", HttpStatus.OK);
     }
 }

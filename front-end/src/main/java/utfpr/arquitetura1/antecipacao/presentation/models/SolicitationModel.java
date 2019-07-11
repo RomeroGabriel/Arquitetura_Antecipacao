@@ -16,6 +16,6 @@ public class SolicitationModel {
     private String lessonPlan;
     // private SolicitationStatus solicitationStatus; Nao sei se vai dar para usar enum depois
     private String solicitationStatus;
-    // private AnticipationModel anticipation;
+    private AnticipationModel anticipation;
     private Long anticipationId;
 }

@@ -28,6 +28,22 @@
     <div class="container">
       <h1 class="display-4">Anexar lista de anuência</h1>
       <p class="lead">Anexe o arquivo contendo a lista de anuências.</p>
+      <form method="POST" enctype="multipart/form-data" action="/solicitation/consent">
+
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
+        </div>
+        <div class="custom-file">
+          <input name="file" type="file" class="custom-file-input" id="inputGroupFile01"
+            aria-describedby="inputGroupFileAddon01">
+          <label class="custom-file-label" for="inputGroupFile01"></label>
+        </div>
+      </div>
+      <div class="d-flex justify-content-end">
+        <button type="submit" class="btn btn-dark">Enviar</button>
+      </div>
+      <form>
     </div>
   </div>
 
